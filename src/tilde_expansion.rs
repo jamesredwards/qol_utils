@@ -4,25 +4,7 @@ pub trait ExpandTilde {
     fn expand_tilde(&self) -> Option<PathBuf>;
 }
 
-// impl ExpandTilde for str {
-//     fn expand_tilde(&self) -> Option<PathBuf> {
-//         let mut path = PathBuf::new();
-//
-//         if self.starts_with("~") {
-//             if let Ok(home_dir) = std::env::var("HOME") {
-//                 let mut expanded_path_str = String::from(home_dir);
-//                 expanded_path_str.push_str(&self[1..]);
-//                 path.push(expanded_path_str);
-//                 Some(path)
-//             } else {
-//                 panic!("No Home dir found")
-//             }
-//         } else {
-//             path.push(self);
-//             Some(path)
-//         }
-//     }
-// }
+
 impl<T: AsRef<str>> ExpandTilde for T {
     fn expand_tilde(&self) -> Option<PathBuf> {
         expand_tilde(self.as_ref())
